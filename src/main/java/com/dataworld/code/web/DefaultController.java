@@ -25,10 +25,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -91,7 +87,6 @@ public class DefaultController {
               
               List<String> cellList = new ArrayList<String>();
               String sheetName = ""; 
-              String listValue = "";
               StringBuffer sb = new StringBuffer();
               
               Sheet sheet = workbook.getSheetAt(i); 
@@ -119,19 +114,19 @@ public class DefaultController {
                        }else{
                           // 타입 별로 내용을 읽는다
                           switch (cell.getCellType()){
-                          case XSSFCell.CELL_TYPE_FORMULA:
+                          case Cell.CELL_TYPE_FORMULA:
                              value = cell.getCellFormula();
                              break;
-                          case XSSFCell.CELL_TYPE_NUMERIC:
+                          case Cell.CELL_TYPE_NUMERIC:
                              value = cell.getNumericCellValue() + "";
                              break;
-                          case XSSFCell.CELL_TYPE_STRING:
+                          case Cell.CELL_TYPE_STRING:
                              value = cell.getStringCellValue() + "";
                              break;
-                          case XSSFCell.CELL_TYPE_BLANK:
+                          case Cell.CELL_TYPE_BLANK:
                              value = cell.getBooleanCellValue()+ "";
                              break;
-                          case XSSFCell.CELL_TYPE_ERROR:
+                          case Cell.CELL_TYPE_ERROR:
                              value = cell.getErrorCellValue() + "";
                              break;
                           }
